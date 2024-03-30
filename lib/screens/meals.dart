@@ -3,32 +3,48 @@ import 'package:meals/Models/meal.dart';
 import 'package:meals/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen({super.key, required this.title, required this.meals});
-  final String title;
+  const MealsScreen({super.key, this.title, required this.meals});
+  final String? title;
   final List<Meal> meals;
 
   @override
   Widget build(BuildContext context) {
-    if (meals.isEmpty == true) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
+    Widget content = Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Uhh Oh... Nothing here !",
+          style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
         ),
-        body: const Center(
-            child: Text(
-          "Noting to Display....",
-          style: TextStyle(color: Colors.white),
-        )),
-      );
-    } else {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
+        const SizedBox(
+          height: 12,
         ),
-        body: ListView.builder(
-            itemCount: meals.length,
-            itemBuilder: (ctx, index) => MealItem(meal: meals[index])),
-      );
+        Text(
+          "Try Selecting Different Category.",
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
+        ),
+      ],
+    ));
+
+    if(meals.isNotEmpty){
+      content  = ListView.builder(
+          itemCount: meals.length,
+          itemBuilder: (ctx,index)=> MealItem(meal: meals[index]));
+
     }
+    if (title == null) {
+      return content;
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title!),
+      ),
+      body: content,
+    );
   }
 }
