@@ -7,12 +7,12 @@ import 'package:meals/Models/meal.dart';
 const availableCategories = [
   Category(
     id: 'c1',
-    title: 'Italian',
+    title: 'Priyanshu',
     color: Colors.purple,
   ),
   Category(
     id: 'c2',
-    title: 'Quick & Easy',
+    title: 'Kashish',
     color: Colors.red,
   ),
   Category(
